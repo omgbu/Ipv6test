@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.qbr.ipv6test.Activity.MainActivity">
+
+
+    <TextView
+        android:text="Ipv6 Test"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:id="@+id/title"
+        android:layout_alignParentEnd="true"
+        android:textSize="30sp"
+        android:textStyle="normal|bold"
+        android:textAlignment="center"
+        android:textColor="@android:color/holo_blue_dark"
+        android:textAllCaps="false" />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:id="@+id/info"
+        android:layout_marginTop="23dp"
+        android:textColor="#ff000000"
+        android:layout_below="@+id/title"
+        android:layout_alignParentStart="true" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        android:layout_gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/Server"
+        android:layout_marginTop="55dp"
+        android:weightSum="1">
+
+        <ListView
+        android:id="@+id/lvDevices"
+            android:layout_centerVertical="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+            />
+    </LinearLayout>
+
+    <Button
+        android:text="客户端"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Client"
+        android:textStyle="normal|bold"
+        android:layout_centerVertical="true"
+        android:layout_toStartOf="@+id/Server"
+        android:layout_marginEnd="16dp" />
+
+    <Button
+        android:text="服务端"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Server"
+        android:fontFamily="sans-serif-medium"
+        android:textStyle="normal|bold"
+        android:layout_alignBaseline="@+id/Client"
+        android:layout_alignBottom="@+id/Client"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:text="命令行"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/Server"
+        android:layout_toEndOf="@+id/Server"
+        android:layout_marginStart="15dp"
+        android:id="@+id/Command"
+        android:textStyle="normal|bold"
+        android:textAlignment="center" />
+
+    <TextView
+        android:text="点击下列蓝牙设备，发送本机IP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:id="@+id/textView"
+        android:textColor="@android:color/black"
+        android:textSize="14sp"
+        android:textStyle="normal|bold"
+        android:textAlignment="viewStart"
+        android:layout_below="@+id/Client"
+        android:layout_alignParentStart="true" />
+
+
+</RelativeLayout>

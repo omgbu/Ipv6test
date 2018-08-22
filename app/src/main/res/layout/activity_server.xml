@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_server"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:text="服务器端已启动！！！\n 等待接收数据。。。"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:id="@+id/textView_s"
+        android:textSize="24sp"
+        android:textStyle="normal|bold"
+        android:textAllCaps="false"
+        android:textAlignment="center" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/Mes"
+        android:textAlignment="textStart"
+        android:textSize="18sp" />
+</LinearLayout>
