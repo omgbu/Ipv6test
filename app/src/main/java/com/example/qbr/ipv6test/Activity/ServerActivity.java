@@ -11,12 +11,16 @@ import com.example.qbr.ipv6test.R;
 import com.example.qbr.ipv6test.Threads.Tcp_server;
 import com.example.qbr.ipv6test.Threads.Udp_server;
 
+import java.net.DatagramSocket;
+
 /**
  * Created by qbr on 2018/8/20.
  */
 
 public class ServerActivity extends Activity{
     TextView textView_s,textView_mes;
+    Tcp_server t;
+    Udp_server t1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,14 +37,29 @@ public class ServerActivity extends Activity{
         String tran= intent.getStringExtra("tran");
         switch (tran){
             case "TCP":
-                Tcp_server t = new Tcp_server(mMessageHandler);
+                t = new Tcp_server(mMessageHandler);
                 t.start();
                 break;
             case "UDP":
-                Udp_server t1 = new Udp_server(mMessageHandler);
+                t1 = new Udp_server(mMessageHandler);
                 t1.start();
                 break;
         }
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(t!=null){
+            t.close();
+            t.interrupt();
+            t = null;
+        }
+        if(t1!=null){
+            t1.close();
+            t1.interrupt();
+            t1 = null;
+        }
     }
 }

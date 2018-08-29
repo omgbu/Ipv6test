@@ -23,9 +23,19 @@ public class CommandActivity extends Activity {
         setContentView(R.layout.activity_comm);
         content = (TextView) findViewById(R.id.content);
         Intent intent = getIntent();
-        String ip= intent.getStringExtra("Ip_server");
+        String address= intent.getStringExtra("add");
+        String ip = null;
+        switch (address){
+            case "对方IP地址":
+                ip= intent.getStringExtra("Ip_server");
+                break;
+            case "Cernet-BUPT":
+                ip= "2001:da8:215:6a01::b198";
+                break;
+        }
         content.append("qbr:\\>  ping6 -c 10 "+ ip + "\n");
         new Thread(new comThread(mMessageHandler, ip)).start();
+
     }
     final Handler mMessageHandler = new Handler() {
         @Override

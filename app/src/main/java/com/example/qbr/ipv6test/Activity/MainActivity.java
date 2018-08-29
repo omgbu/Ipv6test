@@ -62,7 +62,7 @@ public class MainActivity extends Activity implements View.OnClickListener, Adap
                 JSONObject jsonObj = new JSONObject(msg.obj.toString());
                 NextIp = jsonObj.getString("IP");
                 String p = jsonObj.getString("Provider");
-                textView_info.append("\n对方的ip是：\n" + NextIp +"\n"
+                textView_info.append("\n对方的ipv6地址：\n" + NextIp +"\n"
                         +"对方运营商：" + p +"\n");
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -103,7 +103,7 @@ public class MainActivity extends Activity implements View.OnClickListener, Adap
         Button_cm.setOnClickListener(this);
         MyIp = getLocalHostIp();
         provider = getProvidersName();
-        textView_info.setText("本机的ip是：\n" + MyIp+"\n"+ "本机运营商："+ provider +"\n");
+        textView_info.setText("本机的ipv6地址：\n" + MyIp+"\n"+ "本机运营商："+ provider +"\n");
         // 注册广播接收器。接收蓝牙发现讯息
         IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
         registerReceiver(mReceiver, filter);
@@ -168,11 +168,35 @@ public class MainActivity extends Activity implements View.OnClickListener, Adap
             case R.id.Command:
                 Intent intent_cm = new Intent(MainActivity.this, CommandActivity.class);
                 intent_cm.putExtra("Ip_server",NextIp);
-                startActivity(intent_cm);
+                Dialog_c(intent_cm);
                 break;
 
         }
 
+    }
+
+    public void Dialog_c(final Intent intent) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("请选择目的地址");
+        final String[] items = {"对方IP地址", "Cernet-BUPT"};
+        //创建单选对话框
+        //第一个参数:单选对话框中显示的条目所在的字符串数组
+        //第二个参数:默认选择的条目的下标(-1表示默认没有选择任何条目)
+        //第三个参数:设置事件监听
+        builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {
+            //which:用户所选的条目的下标；dialog:触发这个方法的对话框
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(
+                        MainActivity.this,
+                        "您选择的传输方式是:" + items[which],
+                        Toast.LENGTH_SHORT).show();
+                dialog.dismiss();    //关闭对话框
+                intent.putExtra("add",items[which]);
+                startActivity(intent);
+            }
+        });
+        builder.show();          //显示单选对话框
     }
 
     public void Dialog(final Intent intent) {
@@ -217,7 +241,7 @@ public class MainActivity extends Activity implements View.OnClickListener, Adap
                 while (inet.hasMoreElements())
                 {
                     InetAddress ip = inet.nextElement();
-                    // 在这里如果不加isIPv4Address的判断,直接返回,在4.0上获取到的是类似于fe80::1826:66ff:fe23:48e%p2p0的ipv6的地址
+                    // 在这里如果不加isIPv6Address的判断,直接返回,在4.0上获取到的是类似于fe80::1826:66ff:fe23:48e%p2p0的ipv6的地址
                     if (!ip.isLoopbackAddress() && !ip.isLinkLocalAddress()
                             && ip instanceof Inet6Address)
                     {

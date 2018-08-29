@@ -25,13 +25,13 @@ public class Tcp_server extends Thread {
     InputStream inputStream;
     int bytes = -1;
     byte[] buffer = new byte[1024];
+    ServerSocket server=null;
+    Socket socket=null;
     @Override
     public void run() {
         super.run();
         try {
-            ServerSocket server=null;
             server=new ServerSocket(8899);
-            Socket socket=null;
             socket=server.accept();
             inputStream = socket.getInputStream();
             bytes = inputStream.read(buffer);
@@ -52,5 +52,13 @@ public class Tcp_server extends Thread {
             e.printStackTrace();
         }
 
+    }
+
+    public void close(){
+        try {
+            server.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

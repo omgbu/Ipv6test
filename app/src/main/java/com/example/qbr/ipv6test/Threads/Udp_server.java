@@ -46,4 +46,8 @@ public class Udp_server extends Thread {
             e.printStackTrace();
         }
     }
+
+    public void close(){
+        socket.close();
+    }
 }

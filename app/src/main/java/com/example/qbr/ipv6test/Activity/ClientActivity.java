@@ -46,4 +46,5 @@ public class ClientActivity extends Activity {
                 break;
         }
     }
+
 }
